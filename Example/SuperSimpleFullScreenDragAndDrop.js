@@ -144,6 +144,7 @@ class SuperSimpleFullScreenDragAndDropJS extends EventTarget {
                     height: 100%;
                     left: 0;
                     top: 0;
+                    font-size: 10px;
                     opacity: 0;
                 }
 
