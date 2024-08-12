@@ -339,22 +339,18 @@ class SuperSimpleFullScreenDragAndDropJS extends EventTarget {
         this.#element.style  = document.getElementById(`ssfsdadjs-style-${this.#suffix}`);
 
         // Prevent default dragging behaviors of the the browser window
-        ["dragenter", "dragleave", "dragover", "drop"].forEach(event => {
+        ["drag", "dragend", "dragenter", "dragleave", "dragover", "drop"].forEach(event => {
             window.addEventListener(event, this.#preventEventDefaults);
         });
 
-        // Prevent default dragging behaviors of the drag and drop window
-        ["dragleave", "drop"].forEach(event => {
-            this.#element.window.addEventListener(event, this.#preventEventDefaults);
-        });
-
         // Add an event listener to the browser window that listens for a drag event. When dragging something, show the drag and drop window
-        ["dragenter", "dragover"].forEach(event => {
+        ["drag", "dragenter", "dragover"].forEach(event => {
             window.addEventListener(event, this.#showEvent);
         });
 
-        // Add an event listener to drag and drop window. When dragging stops or something is dropped, hide the drag and drop window
-        ["dragleave", "drop"].forEach(event => {
+        // Add event listeners to drag and drop window. Prevent default dragging behaviors. When dragging stops or something is dropped, hide the drag and drop window
+        ["dragend", "dragleave", "drop"].forEach(event => {
+            this.#element.window.addEventListener(event, this.#preventEventDefaults);
             this.#element.window.addEventListener(event, this.#hideEvent);
         });
 
@@ -369,7 +365,7 @@ class SuperSimpleFullScreenDragAndDropJS extends EventTarget {
     disable() {
 
         // Remove all event listeners
-        ["dragenter", "dragleave", "dragover", "drop"].forEach(event => {
+        ["drag", "dragend", "dragenter", "dragleave", "dragover", "drop"].forEach(event => {
 
             window.removeEventListener(event, this.#preventEventDefaults);
             window.removeEventListener(event, this.#showEvent);
