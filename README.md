@@ -32,14 +32,15 @@ dragAndDrop.enable();
 
 ### Considerations
 
-To avoid issues, consider adding an event listener to check if the page has fully loaded before setting up the drag and drop window.
+To avoid issues, consider adding an event listener to check if the page has fully loaded before enabling the drag and drop window.
 
 ```javascript
 
 // Add an event listener to check if the page has fully loaded
 document.addEventListener("DOMContentLoaded", () => {
 
-    // Setup code for the drag and drop window
+    // Enable the drag and drop window once the page loaded
+    dragAndDrop.enable();
 
 };
 
@@ -58,9 +59,6 @@ dragAndDrop.text  = "Drag and Drop";
 // The path or data of the icon that is displayed when the drag and drop window appears
 dragAndDrop.icon = "/path/to/my/icon.png";
 
-// The type of input field, i.e. "text" or "file"
-dragAndDrop.type = "text";
-
 // Z-Index, this should be the highest value of all the HTML elements on the site to make the window appear in front of everything
 dragAndDrop.zIndex = 1000;
 
@@ -75,10 +73,13 @@ These are the styling options that can be adjusted before enabling the main wind
 ```javascript
 // Main window styling
 dragAndDrop.style.window.padding   = "50px";
-dragAndDrop.style.background.color = "rgba(0, 0, 0, 0.5)";
-dragAndDrop.style.background.blur  = "50px";
+dragAndDrop.style.window.color     = "rgba(0, 0, 0, 0.5)";
+dragAndDrop.style.window.blur      = "50px";
+dragAndDrop.style.window.animation = "100ms";
 
 // Border styling
+dragAndDrop.style.border.width     = "100%";
+dragAndDrop.style.border.height    = "100%";
 dragAndDrop.style.border.size      = "5px";
 dragAndDrop.style.border.color     = "rgba(255, 255, 255, 1)";
 dragAndDrop.style.border.style     = "dashed";
